@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
-  console.log("test");
   findTimezone();
+  window.setInterval(function(){
+    findTimezone();
+  }, 1000);
 });
 
 const targetHour = 17;
