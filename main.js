@@ -9,12 +9,12 @@ const targetHour = 17;
 var cities = new Array();
 cities[-12] = "Pacific Ocean";
 cities[-11] = "Pago Pago, American Samoa"; 
-cities[-10] = "Honolulu, USA";
-cities[-9] = "Anchorage, USA"; 
-cities[-8] = "Los Angeles, USA";
-cities[-7] = "Phoenix, USA"; 
+cities[-10] = "Honolulu, USA (ignoring DST)";
+cities[-9] = "Anchorage, USA (ignoring DST)"; 
+cities[-8] = "Los Angeles, USA (ignoring DST)";
+cities[-7] = "Phoenix, USA (ignoring DST)"; 
 cities[-6] = "Mexico City, Mexico"; 
-cities[-5] = "New York City, USA"; 
+cities[-5] = "New York City, USA (ignoring DST)"; 
 cities[-4] = "Santiago, Chile"; 
 cities[-3] = "Sao Paulo, Brazil"; 
 cities[-2] = "Atlantic Ocean"; 
@@ -36,7 +36,9 @@ cities[12] = "Auckland, New Zealand";
 function getOffset() {
   var utcHour = new Date().getUTCHours();
   if(utcHour == 0) utcHour = 24;
-  return targetHour - utcHour;
+  var offset = targetHour - utcHour;
+  if(offset > 12) offset = offset - 24;
+  return offset;
 }
 
 function getCity(offset) {
